@@ -6,7 +6,7 @@ services:
     restart: always
     container_name: webapp_project_name
     build:
-      context: front/src
+      context: front/web
       dockerfile: Dockerfile
     ports:
       - 8822:80
