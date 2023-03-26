@@ -1,5 +1,5 @@
 # build gradle
-FROM gradle:6.7.1-jdk17 AS build
+FROM gradle:jdk17 AS build
 COPY --chown=gradle:gradle demo/settings.gradle /home/gradle/src/settings.gradle
 COPY --chown=gradle:gradle build.gradle /home/gradle/src/
 COPY --chown=gradle:gradle demo /home/gradle/src/api
