@@ -13,5 +13,5 @@ ENV EXPOSE_PORT=8080
 EXPOSE ${EXPOSE_PORT}
 
 RUN mkdir /app
-COPY --from=build /home/gradle/src/api/build/libs/demo-0.0.1-SNAPSHOT-plain.jar /app/api.jar
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/api.jar
 CMD ["java", "-XshowSettings:vm", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseContainerSupport", "-jar", "/app/api.jar""--spring.config.location=classpath:/${MODE}.properties"]
