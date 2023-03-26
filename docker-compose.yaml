@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+
+  webapp_project_name:
+    restart: always
+    container_name: webapp_project_name
+    build:
+      context: front/src
+      dockerfile: Dockerfile
+    ports:
+      - 8822:80
+
+  api_project_name:
+    restart: always
+    container_name: api_project_name
+    build:
+      context: back/demo
+      dockerfile: Dockerfile
+    ports:
+      - 2288:8080
+    volumes: 
+      - ./logs:/logs
