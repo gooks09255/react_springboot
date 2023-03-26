@@ -1,8 +1,9 @@
 # build gradle
 FROM gradle:jdk17 AS build
-COPY --chown=gradle:gradle ./settings.gradle ./settings.gradle
-COPY --chown=gradle:gradle build.gradle ./
-COPY --chown=gradle:gradle . ./
+COPY --chown=gradle:gradle ./settings.gradle /home/gradle/src/settings.gradle
+COPY --chown=gradle:gradle build.gradle /home/gradle/src/
+COPY --chown=gradle:gradle . /home/gradle/src/api
+WORKDIR /home/gradle/src
 RUN gradle build -x test --stacktrace
 
 # production deployment
@@ -12,5 +13,5 @@ ENV EXPOSE_PORT=8080
 EXPOSE ${EXPOSE_PORT}
 
 RUN mkdir /app
-COPY --from=build ./*.jar /app/api.jar
+COPY --from=build /home/gradle/src/api/build/libs/demo-0.0.1-SNAPSHOT-plain.jar /app/api.jar
 CMD ["java", "-XshowSettings:vm", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseContainerSupport", "-jar", "/app/api.jar""--spring.config.location=classpath:/${MODE}.properties"]
