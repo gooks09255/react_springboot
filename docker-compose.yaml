@@ -10,6 +10,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8822:80
+    deploy:
+      resources:
+        limits:
+          cpus: ".21"
+          memory: 518M
+        reservations:
+          memory: 518M
+
 
   api_project_name:
     restart: always
@@ -21,3 +29,10 @@ services:
       - 2288:8080
     volumes: 
       - ./logs:/logs
+    deploy:
+      resources:
+        limits:
+          cpus: ".21"
+          memory: 518M
+        reservations:
+          memory: 518M
